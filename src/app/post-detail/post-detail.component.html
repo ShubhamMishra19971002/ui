@@ -1,0 +1,10 @@
+<div class="container mt-5">
+    <div *ngIf="post; else loading">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.content }}</p>
+      <small>Created at: {{ post.createdAt | date }}</small>
+    </div>
+    <ng-template #loading>
+      <p>Loading post...</p>
+    </ng-template>
+  </div>

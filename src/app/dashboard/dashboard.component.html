@@ -1,0 +1,40 @@
+<div class="p-6">
+    <h2 class="text-2xl font-bold mb-4">User Posts</h2>
+    
+    <button class="bg-blue-500 text-white px-4 py-2 rounded mb-4" (click)="openModal()">
+      Create New Post
+    </button>
+    
+    <div *ngFor="let post of posts; let i = index" class="bg-gray-100 p-4 rounded-lg mb-4 shadow">
+      <h3 class="text-lg font-semibold">{{ post.title }}</h3>
+      <p class="text-gray-700">{{ post.description }}</p>
+      
+      <div class="mt-2">
+        <button class="bg-green-500 text-white px-3 py-1 rounded mr-2" (click)="openModal(post, i)">
+          Edit
+        </button>
+        <button class="bg-red-500 text-white px-3 py-1 rounded" (click)="deletePost(i)">
+          Delete
+        </button>
+      </div>
+    </div>
+    
+    <!-- Modal -->
+    <div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+      <div class="bg-white p-6 rounded shadow-lg">
+        <h3 class="text-xl font-bold mb-4">{{ editingIndex !== null ? 'Edit' : 'Create' }} Post</h3>
+        
+        <label class="block mb-2">Title:</label>
+        <input class="w-full p-2 border rounded mb-2" [(ngModel)]="currentPost.title">
+        
+        <label class="block mb-2">Description:</label>
+        <textarea class="w-full p-2 border rounded mb-4" [(ngModel)]="currentPost.description"></textarea>
+        
+        <div class="flex justify-end">
+          <button class="bg-gray-500 text-white px-4 py-2 rounded mr-2" (click)="closeModal()">Cancel</button>
+          <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="savePost()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
